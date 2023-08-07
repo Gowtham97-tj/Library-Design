@@ -1,0 +1,24 @@
+default: &default
+  adapter: postgresql
+  pool: 5
+  timeout: 5000
+  host: localhost
+
+development:
+  <<: *default
+  host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
+  database: library
+  username: postgres
+  password: <%= ENV['DATABASE_PASSWORD'] || '' %>
+
+test:
+  <<: *default
+  database: library_test
+  username: postgres
+  password: #<%= ENV['DATABASE_PASSWORD'] || '' %>
+
+production:
+  <<: *default
+  database: library_production
+  username: postgres
+  password: <%= ENV['PROJECT_1_DATABASE_PASSWORD'] %>
